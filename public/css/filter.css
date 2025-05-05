@@ -1,0 +1,63 @@
+
+
+/* public/css/filter.css */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-radius: 8px;
+  }
+  
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-item label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+  }
+  
+  .filter-item select,
+  .filter-item input[type="date"] {
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .filter-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .filter-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #007acc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #scrape-btn {
+    background-color: #007acc;
+    color: #fff;
+  }
+  
+  #refresh-btn {
+    background-color: #fff;
+    color: #007acc;
+  }
+  
+  .filter-actions button:hover {
+    opacity: 0.9;
+  }
+  

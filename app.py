@@ -1,7 +1,9 @@
 
+
 # app.py
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import feedparser
+import datetime
 from cachetools import TTLCache
 
 # Serve files out of your `public/` directory:
@@ -25,27 +27,71 @@ def index():
 
 @app.route('/api/articles')
 def articles():
-    # return cached if fresh
-    if 'articles' in cache:
+    # 1) Read query params (defaults match your UI defaults)
+    limit      = request.args.get('limit',  default=20,  type=int)
+    feed_param = request.args.get('feed')            # e.g. a feed URL
+    start      = request.args.get('start')           # YYYY-MM-DD
+    end        = request.args.get('end')             # YYYY-MM-DD
+
+    # 2) Decide if we should use the cached “default” list
+    use_cache = (limit == 20 and not feed_param and not start and not end)
+    if use_cache and 'articles' in cache:
         return jsonify(cache['articles'])
 
+    # 3) Fetch & parse all feeds
     all_entries = []
     for url in FEEDS:
         feed = feedparser.parse(url)
         for entry in feed.entries:
+            # parse published date into a datetime (if available)
+            pub_dt = None
+            if getattr(entry, 'published_parsed', None):
+                pub_dt = datetime.datetime(*entry.published_parsed[:6])
+                pub_date_str = entry.published
+            else:
+                pub_date_str = ''
+
             teaser = entry.get('summary', '')[:197].rsplit(' ',1)[0] + '…'
             all_entries.append({
-                'title': entry.title,
-                'link': entry.link,
-                'pubDate': entry.get('published', ''),
-                'teaser': teaser
+                'title':      entry.title,
+                'link':       entry.link,
+                'pubDate':    pub_date_str,
+                'teaser':     teaser,
+                'feed':       url,
+                'pub_dt':     pub_dt
             })
-    # newest first, top 20
-    all_entries.sort(key=lambda e: e['pubDate'], reverse=True)
-    top20 = all_entries[:20]
-    cache['articles'] = top20
-    return jsonify(top20)
+
+    # 4) Apply “feed” filter if given
+    if feed_param:
+        all_entries = [e for e in all_entries if e['feed'] == feed_param]
+
+    # 5) Apply date-range filters
+    if start:
+        start_dt = datetime.datetime.fromisoformat(start)
+        all_entries = [e for e in all_entries if e['pub_dt'] and e['pub_dt'] >= start_dt]
+    if end:
+        end_dt = datetime.datetime.fromisoformat(end) + datetime.timedelta(days=1)
+        all_entries = [e for e in all_entries if e['pub_dt'] and e['pub_dt'] < end_dt]
+
+    # 6) Sort newest first
+    all_entries.sort(key=lambda e: e['pub_dt'] or datetime.datetime.min, reverse=True)
+
+    # 7) Take the requested number
+    top_entries = all_entries[:limit]
+
+    # 8) Cache the default set
+    if use_cache:
+        cache['articles'] = top_entries
+
+    # 9) Remove internal fields before returning
+    for e in top_entries:
+        e.pop('pub_dt', None)
+        e.pop('feed',   None)
+
+    return jsonify(top_entries)
+
 
 if __name__ == '__main__':
     # match your front-end fetch on port 3000
+    # 3000 wasn't working so I changed it to 5000
     app.run(port=5000, debug=True)

@@ -1,24 +1,105 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cyber News Hub</title>
-  <link rel="stylesheet" href="./css/styles.css" />
-</head>
-<body>
-  <header>
-    <h1>Cyber News Hub</h1>
-    <p>Your one-stop aggregator for top cybersecurity & tech headlines</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber News Hub</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/filter.css">
+  </head>
+  <body>
 
-  <main>
-    <div id="articles">
-      <!-- Articles will be injected here -->
-    </div>
-  </main>
+    <!-- NAVBAR -->
+    <nav class="main-nav">
+      <div class="nav-left">
+        <a href="#" class="logo">Cyber News Hub</a>
+      </div>
+      <ul class="nav-right">
+        <li><a href="#">Menu</a></li>
+        <li class="dropdown">
+          <button class="dropbtn">Categories ▾</button>
+          <ul class="dropdown-content">
+            <li><a href="#" data-feed="all">All</a></li>
+            <li><a href="#"
+                data-feed="https://feeds.feedburner.com/TheHackersNews">The
+                Hacker News</a></li>
+            <li><a href="#"
+                data-feed="https://krebsonsecurity.com/feed/">Krebs
+                on Security</a></li>
+            <li><a href="#"
+                data-feed="https://www.wired.com/feed/category/security/latest/rss">Wired
+                Security</a></li>
+            <li><a href="#"
+                data-feed="https://techcrunch.com/tag/security/feed/">TechCrunch
+                Security</a></li>
+          </ul>
+        </li>
+        <li><a href="#">My Recommendations</a></li>
+      </ul>
+    </nav>
 
-  <script src="./js/script.js"></script>
-</body>
+    <!-- HEADER -->
+    <header>
+      <h1>Cyber News Hub</h1>
+      <p>Your one-stop aggregator for top cybersecurity & tech
+        headlines</p>
+    </header>
+
+    <main>
+      <!-- ===== FILTER BAR ===== -->
+      <section class="filter-bar">
+        <div class="filter-item">
+          <label for="num-stories">Number of stories</label>
+          <select id="num-stories">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+
+        <div class="filter-item">
+          <label for="feed-filter">Feeds</label>
+          <select id="feed-filter">
+            <option value="all">All</option>
+            <option
+              value="https://feeds.feedburner.com/TheHackersNews">The
+              Hacker News</option>
+            <option value="https://krebsonsecurity.com/feed/">Krebs
+              on Security</option>
+            <option
+              value="https://www.wired.com/feed/category/security/latest/rss">Wired
+              Security</option>
+            <option
+              value="https://techcrunch.com/tag/security/feed/">TechCrunch
+              Security</option>
+          </select>
+        </div>
+
+        <div class="filter-item">
+          <label for="start-date">From</label>
+          <input type="date" id="start-date" />
+        </div>
+
+        <div class="filter-item">
+          <label for="end-date">To</label>
+          <input type="date" id="end-date" />
+        </div>
+
+        <div class="filter-actions">
+          <button id="scrape-btn">Scrape</button>
+          <button id="refresh-btn">Refresh</button>
+        </div>
+      </section>
+
+      <!-- ARTICLES -->
+      <div id="articles">
+        <!-- Articles will be injected here -->
+      </div>
+    </main>
+
+    <script src="./js/script.js"></script>
+  </body>
 </html>
