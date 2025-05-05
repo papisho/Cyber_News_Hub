@@ -3,23 +3,23 @@
 // public/js/script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('articles');
-  const numStories = document.getElementById('num-stories');
-  const feedFilter = document.getElementById('feed-filter');
-  const startDate = document.getElementById('start-date');
-  const endDate = document.getElementById('end-date');
-  const scrapeBtn = document.getElementById('scrape-btn');
-  const refreshBtn = document.getElementById('refresh-btn');
-  const dropLinks = document.querySelectorAll('.dropdown-content a');
-  const dropBtn = document.querySelector('.dropbtn');
+  const container    = document.getElementById('articles');
+  const numStories   = document.getElementById('num-stories');
+  const feedFilter   = document.getElementById('feed-filter');
+  const startDate    = document.getElementById('start-date');
+  const endDate      = document.getElementById('end-date');
+  const scrapeBtn    = document.getElementById('scrape-btn');
+  const refreshBtn   = document.getElementById('refresh-btn');
+  const dropLinks    = document.querySelectorAll('.dropdown-content a');
+  const dropBtn      = document.querySelector('.dropbtn');
 
   // Clear out existing articles
   function clearArticles() {
     container.innerHTML = '';
   }
 
-  // Fetch & render articles based on filter controls
-  async function loadArticles() {
+  // Fetch & render articles based on filter controls (I updated this part)
+  async function loadArticles(forceRefresh = false) {
     const params = new URLSearchParams();
     params.append('limit', numStories.value);
     if (feedFilter.value && feedFilter.value !== 'all') {
@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (endDate.value) {
       params.append('end', endDate.value);
+    }
+    if (forceRefresh) {
+      params.append('refresh', '1');
     }
 
     clearArticles();
@@ -75,16 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadArticles();
   });
 
-  // “Refresh” button: reset filters, then fetch defaults
-  refreshBtn.addEventListener('click', () => {
-    numStories.value = '10';
-    feedFilter.value = 'all';
-    dropBtn.textContent = 'Categories ▾';
-    startDate.value = '';
-    endDate.value = '';
-    loadArticles();
-  });
+ // “Refresh” button: keep filters but force fresh fetch
+ refreshBtn.addEventListener('click', () => {
+  loadArticles(true);
+});
 
   // Initial load
-  loadArticles();
+loadArticles();
 });
