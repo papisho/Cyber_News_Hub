@@ -4,4 +4,10 @@ A place where you can find most of your cyber news in one place.
 
 <h1>Video Walkthrough</h1>
 <p>This video will be updated whenever a new feature is added.</p>
-<a href="" alt="video walkthrouhg">Video Walkthrough </a>
+
+Here's a walkthrough of implemented features:
+
+<img src='/public/assets/cyber_anim.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with 
+[ScreenToGif](https://www.screentogif.com/) 
