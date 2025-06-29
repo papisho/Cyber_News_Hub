@@ -12,6 +12,11 @@ Here's a walkthrough of implemented features:
 GIF created with 
 [ScreenToGif](https://www.screentogif.com/) 
 
+## Prerequisites
+
+* Python 3.11 or higher
+* `pip` for installing dependencies
+
 ## Installation
 
 Install the python dependencies with:
@@ -38,6 +43,17 @@ Run without setting `FLASK_ENV` (or set it to any value other than
 ```bash
 python app.py
 ```
+
+## Available Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Serves the web UI (static files from `public/`). |
+| `/api/articles` | Returns a JSON list of news articles. Supports `limit`, `feed`, `start`, `end` and `refresh` query parameters. |
+
+## Using the UI
+
+Open your browser to `http://localhost:5000` after starting the app. Use the dropdowns at the top to choose how many stories to show, select a feed source, and set optional start/end dates. Click **Scrape** to load articles or **Refresh** to shuffle the results while keeping your filters.
 
 ## License
 
