@@ -15,5 +15,26 @@ GIF created with
 ## Installation
 
 Install the python dependencies with:
+```bash
 pip install -r requirements.txt
+```
 
+## Running the app
+
+### Development
+
+Use development mode to enable hot reloading and debug output:
+
+```bash
+export FLASK_ENV=development
+python app.py
+```
+
+### Production
+
+Run without setting `FLASK_ENV` (or set it to any value other than
+`development`) to start the server without debug mode:
+
+```bash
+python app.py
+```
