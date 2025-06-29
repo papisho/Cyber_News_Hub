@@ -38,3 +38,7 @@ Run without setting `FLASK_ENV` (or set it to any value other than
 ```bash
 python app.py
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
