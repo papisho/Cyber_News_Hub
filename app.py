@@ -60,7 +60,8 @@ def articles():
                 'link':    entry.link,
                 'pubDate': pub_date_str,
                 'teaser':  teaser,
-                'pub_dt':  pub_dt
+                'pub_dt':  pub_dt,
+                'feed':  url,
             })
 
     # 4) Feed filter
