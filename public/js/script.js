@@ -50,13 +50,25 @@ document.addEventListener('DOMContentLoaded', () => {
       articles.forEach(a => {
         const card = document.createElement('div');
         card.className = 'article-card';
-        card.innerHTML = `
-          <h2>${a.title}</h2>
-          <p>${a.teaser}</p>
-          <a href="${a.link}" target="_blank" class="read-more">Read more →</a>
-        `;
+        
+        const title = document.createElement('h2');
+        title.textContent = a.title;
+
+        const teaser = document.createElement('p');
+        teaser.textContent = a.teaser;
+
+        const link = document.createElement('a');
+        link.href = a.link;
+        link.target = '_blank';
+        link.className = 'read-more';
+        link.textContent = 'Read more →';
+
+        card.appendChild(title);
+        card.appendChild(teaser);
+        card.appendChild(link);
         container.appendChild(card);
       });
+
     } catch (err) {
       container.textContent = 'Sorry, unable to load articles right now.';
       console.error(err);
