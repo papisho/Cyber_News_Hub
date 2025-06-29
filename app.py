@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 import feedparser
 import datetime
 import random
+import os
 from cachetools import TTLCache
 
 # Serve files out of your `public/` directory:
@@ -98,4 +99,5 @@ def articles():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    debug_mode = os.environ.get('FLASK_ENV') == 'development'
+    app.run(port=5000, debug=debug_mode)
