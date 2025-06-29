@@ -1,0 +1,26 @@
+
+# Python bytecode and cache directories
+__pycache__/
+*.py[cod]
+
+# Distribution/packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# Node dependencies
+node_modules/
+
+# Editor directories
+.vscode/
+.idea/
