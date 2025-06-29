@@ -3,3 +3,4 @@ Flask
 feedparser
 cachetools
 
+pytest

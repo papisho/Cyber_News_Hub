@@ -55,6 +55,15 @@ python app.py
 
 Open your browser to `http://localhost:5000` after starting the app. Use the dropdowns at the top to choose how many stories to show, select a feed source, and set optional start/end dates. Click **Scrape** to load articles or **Refresh** to shuffle the results while keeping your filters.
 
+## Running Tests
+
+The test suite uses **pytest**. Install the dependencies (including `pytest`) and run:
+
+```bash
+pip install -r requirements.txt
+pytest
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
