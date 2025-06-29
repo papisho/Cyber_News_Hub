@@ -11,3 +11,9 @@ Here's a walkthrough of implemented features:
 
 GIF created with 
 [ScreenToGif](https://www.screentogif.com/) 
+
+## Installation
+
+Install the python dependencies with:
+pip install -r requirements.txt
+
